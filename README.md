@@ -38,6 +38,16 @@ Then enable the plugin in **Settings → Admin Center → Plugins**.
 2. Upload a video file via the **Attachments** tab, or add text to the **Notes** field
 3. The **Assembly Instructions** tab will appear automatically in the left hand tabs
 
+## Contributing
+
+Issues and PRs welcome. 
+- Please include inventree version and a description of which files were attached when submitting an issue
+
+Future Ideas for expanding plugin:
+- PDF attachment rendering inline
+- YouTube embed support
+- Support for multiple videos per part
+
 ## License
 
 MIT - see [LICENSE](LICENSE)
