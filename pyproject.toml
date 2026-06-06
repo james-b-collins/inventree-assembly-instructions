@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=42"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "inventree-assembly-instructions"
+version = "0.1.0"
+description = "Assembly instructions panel (video + MarkDown) for InvenTree parts"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.9"
+authors = [
+    {name = "James Collins"}
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["inventree_assembly_instructions*"]
+
+[tool.setuptools.package-data]
+inventree_assembly_instructions = [
+    "static/**/*",
+]
+
+[project.entry-points.inventree_plugins]
+AssemblyInstructionsPlugin = "inventree_assembly_instructions:AssemblyInstructionsPlugin"

@@ -1,0 +1,1 @@
+from inventree_assembly_instructions.inventree_assembly_instructions import AssemblyInstructionsPlugin
