@@ -37,6 +37,8 @@ class AssemblyInstructionsPlugin(UserInterfaceMixin, InvenTreePlugin):
     DESCRIPTION = "Shows assembly instructions as optional embedded video or notes"
     VERSION = "0.1.0"
     AUTHOR = "James Collins"
+    WEBSITE = "https://github.com/james-b-collins/inventree-assembly-instructions"
+    LICENSE = "MIT"
 
     def get_ui_panels(self, request, context, **kwargs):
         instance_id = context.get('target_id')
