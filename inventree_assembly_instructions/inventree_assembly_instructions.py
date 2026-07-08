@@ -35,7 +35,7 @@ class AssemblyInstructionsPlugin(UserInterfaceMixin, InvenTreePlugin):
     SLUG = "assembly-instructions"
     TITLE = "Assembly Instructions"
     DESCRIPTION = "Shows assembly instructions as optional embedded video or notes"
-    VERSION = "0.1.0"
+    VERSION = "0.1.1"
     AUTHOR = "James Collins"
     WEBSITE = "https://github.com/james-b-collins/inventree-assembly-instructions"
     LICENSE = "MIT"
