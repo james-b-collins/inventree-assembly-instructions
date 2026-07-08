@@ -22,6 +22,8 @@ function markdownToHtml(md) {
     .replace(/`(.+?)`/g, '<code>$1</code>')
     // unordered list items
     .replace(/^\s*[-*] (.+)$/gm, '<li>$1</li>')
+    // images (must come before links)
+    .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" style="max-width:100%;border-radius:4px">')
     // links
     .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" target="_blank" rel="noreferrer">$1</a>')
     // blank lines to paragraphs
