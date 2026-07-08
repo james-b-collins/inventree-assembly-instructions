@@ -6,30 +6,6 @@ function getExt(url) {
   return match ? `.${match[1]}` : '';
 }
 
-//Basic Markdown to html converter
-function markdownToHtml(md) {
-  if (!md) return '';
-  return md
-    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-    // headings
-    .replace(/^### (.+)$/gm, '<h3>$1</h3>')
-    .replace(/^## (.+)$/gm, '<h2>$1</h2>')
-    .replace(/^# (.+)$/gm, '<h1>$1</h1>')
-    // bold / italic
-    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*(.+?)\*/g, '<em>$1</em>')
-    // inline code
-    .replace(/`(.+?)`/g, '<code>$1</code>')
-    // unordered list items
-    .replace(/^\s*[-*] (.+)$/gm, '<li>$1</li>')
-    // images (must come before links)
-    .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" style="max-width:100%;border-radius:4px">')
-    // links
-    .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" target="_blank" rel="noreferrer">$1</a>')
-    // blank lines to paragraphs
-    .replace(/\n{2,}/g, '</p><p>')
-    .replace(/\n/g, '<br>');
-}
 
 // Main function to render the panel content
 export async function renderPanel(target, data) {
@@ -78,11 +54,17 @@ export async function renderPanel(target, data) {
     parts.push(`
       <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid #dee2e6;
                   line-height:1.6;font-size:0.95rem">
-        <p>${markdownToHtml(notes)}</p>
+        ${notes}
       </div>`);
   }
 
   target.innerHTML = `<div style="padding:1rem">${parts.join('')}</div>`;
+
+  // Convert any raw markdown image syntax left inside the rendered HTML
+  target.innerHTML = target.innerHTML.replace(
+    /!\[([^\]]*)\]\(([^)]+)\)/g,
+    '<img src="$2" alt="$1" style="max-width:100%;border-radius:4px">'
+  );
 }
 
 // Function to determine if the panel should be hidden based on context
