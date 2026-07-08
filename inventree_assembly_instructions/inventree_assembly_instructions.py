@@ -35,7 +35,7 @@ class AssemblyInstructionsPlugin(UserInterfaceMixin, InvenTreePlugin):
     SLUG = "assembly-instructions"
     TITLE = "Assembly Instructions"
     DESCRIPTION = "Shows assembly instructions as optional embedded video or notes"
-    VERSION = "0.1.1"
+    VERSION = "0.1.2"
     AUTHOR = "James Collins"
     WEBSITE = "https://github.com/james-b-collins/inventree-assembly-instructions"
     LICENSE = "MIT"
@@ -55,6 +55,6 @@ class AssemblyInstructionsPlugin(UserInterfaceMixin, InvenTreePlugin):
                 'key': 'assembly-instructions',
                 'title': 'Assembly Instructions',
                 'icon': 'ti:video:outline',
-                'source': f'{self.plugin_static_file("assembly_instructions/panel.js")}:renderPanel',
+                'source': f'{self.plugin_static_file("assembly_instructions/panel.js")}?v={self.VERSION}:renderPanel',
             }
         ]
