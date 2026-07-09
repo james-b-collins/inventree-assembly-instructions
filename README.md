@@ -38,6 +38,8 @@ Then enable the plugin in **Settings → Admin Center → Plugins**.
 2. Upload a video file via the **Attachments** tab, or add text to the **Notes** field
 3. The **Assembly Instructions** tab will appear automatically in the left hand tabs
 
+    **Note:** you may need to adjust your servers network settings to increase the maximum file size and increase the timeout limit in order to upload larger video files. These settings are dependent on deployment so will not be outlined here.
+
 ## Contributing
 
 Issues and PRs welcome. 
