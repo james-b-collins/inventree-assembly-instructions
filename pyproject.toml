@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "inventree-assembly-instructions"
-version = "1.0.0"
+version = "1.1.0"
 description = "Assembly instructions panel (video + MarkDown) for InvenTree parts"
 readme = "README.md"
 license = "MIT"
