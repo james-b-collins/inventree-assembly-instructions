@@ -13,23 +13,16 @@ function getCsrfToken() {
 async function loadContent(target, partId) {
   let attachments = [];
   let notes = '';
-  let maxUploadMb = 10;
 
   try {
-    const [attResp, partResp, limitResp] = await Promise.all([
+    const [attResp, partResp] = await Promise.all([
       fetch(`/api/attachment/?model_type=part&model_id=${partId}`),
       fetch(`/api/part/${partId}/`),
-      fetch('/api/settings/global/INVENTREE_MAX_UPLOAD_SIZE/'),
     ]);
     const attJson  = await attResp.json();
     const partJson = await partResp.json();
     attachments = Array.isArray(attJson) ? attJson : (attJson.results ?? []);
     notes = partJson.notes || '';
-    if (limitResp.ok) {
-      const limitJson = await limitResp.json();
-      const parsed = parseFloat(limitJson.value);
-      if (!isNaN(parsed) && parsed > 0) maxUploadMb = parsed;
-    }
   } catch (e) {
     target.innerHTML = '<p style="padding:1rem;color:red">Failed to load content.</p>';
     return;
@@ -94,7 +87,7 @@ async function loadContent(target, partId) {
   const statusEl   = target.querySelector('#asm-upload-status');
 
   fileInput.addEventListener('change', () => {
-    if (fileInput.files[0]) uploadFile(fileInput.files[0], partId, statusEl, target, maxUploadMb);
+    if (fileInput.files[0]) uploadFile(fileInput.files[0], partId, statusEl, target);
     fileInput.value = '';
   });
 
@@ -113,18 +106,11 @@ async function loadContent(target, partId) {
     e.preventDefault();
     dropZone.style.borderColor = '#ced4da';
     const file = e.dataTransfer.files[0];
-    if (file) uploadFile(file, partId, statusEl, target, maxUploadMb);
+    if (file) uploadFile(file, partId, statusEl, target);
   });
 }
 
-function uploadFile(file, partId, statusEl, target, maxUploadMb = 10) {
-  const limitBytes = maxUploadMb * 1024 * 1024;
-  if (file.size > limitBytes) {
-    statusEl.style.color = 'red';
-    statusEl.textContent = `File too large: ${(file.size / 1024 / 1024).toFixed(1)} MB exceeds the ${maxUploadMb} MB server limit.`;
-    return;
-  }
-
+function uploadFile(file, partId, statusEl, target) {
   const progressWrap  = target.querySelector('#asm-progress-wrap');
   const progressBar   = target.querySelector('#asm-progress-bar');
   const progressLabel = target.querySelector('#asm-progress-label');
